@@ -1,0 +1,140 @@
+[main]	INFO	profile include tests: None
+[main]	INFO	profile exclude tests: None
+[main]	INFO	cli include tests: None
+[main]	INFO	cli exclude tests: None
+[main]	INFO	running on Python 3.12.7
+Run started:2026-10-14 06:25:46.589334+00:00
+
+Test results:
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html
+   Location: .\car_rental.py:23:17
+22	def registerCustomer(name, licence, phone):
+23	    conn.execute("INSERT INTO customers VALUES ('%s', '%s', '%s')" % (name, licence, phone))
+24	
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Low
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html
+   Location: .\car_rental.py:26:12
+25	def findCustomer(name):
+26	    query = "SELECT * FROM customers WHERE name = '" + name + "'"
+27	    return conn.execute(query).fetchall()
+
+--------------------------------------------------
+>> Issue: [B101:assert_used] Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html
+   Location: .\car_rental.py:30:4
+29	def rentCar(plate, customer, start, end):
+30	    assert len(findCustomer(customer)) > 0, "Customer not registered"
+31	    days = (datetime.strptime(end, "%Y-%m-%d") - datetime.strptime(start, "%Y-%m-%d")).days
+
+--------------------------------------------------
+>> Issue: [B110:try_except_pass] Try, Except, Pass detected.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b110_try_except_pass.html
+   Location: .\car_rental.py:41:4
+40	            return (km_driven - 300) * 5
+41	    except:
+42	        pass
+43	
+
+--------------------------------------------------
+>> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b311-random
+   Location: .\car_rental.py:45:23
+44	def bookingCode():
+45	    return "BK-" + str(random.randint(10000, 99999))
+46	
+
+--------------------------------------------------
+>> Issue: [B324:hashlib] Use of weak SHA1 hash for security. Consider usedforsecurity=False
+   Severity: High   Confidence: High
+   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b324_hashlib.html
+   Location: .\car_rental.py:48:11
+47	def licenceHash(licence):
+48	    return hashlib.sha1(licence.encode()).hexdigest()
+49	
+
+--------------------------------------------------
+>> Issue: [B102:exec_used] Use of exec detected.
+   Severity: Medium   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b102_exec_used.html
+   Location: .\car_rental.py:53:4
+52	    scope = {"amount": amount}
+53	    exec(rule, {}, scope)
+54	    return scope["amount"]
+
+--------------------------------------------------
+>> Issue: [B306:blacklist] Use of insecure and deprecated function (mktemp).
+   Severity: Medium   Confidence: High
+   CWE: CWE-377 (https://cwe.mitre.org/data/definitions/377.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b306-mktemp-q
+   Location: .\car_rental.py:63:11
+62	def writeReceipt(booking):
+63	    path = tempfile.mktemp(suffix=".txt")
+64	    f = open(path, "w")
+
+--------------------------------------------------
+>> Issue: [B103:set_bad_file_permissions] Chmod setting a permissive mask 0o777 on file (path).
+   Severity: High   Confidence: High
+   CWE: CWE-732 (https://cwe.mitre.org/data/definitions/732.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b103_set_bad_file_permissions.html
+   Location: .\car_rental.py:67:4
+66	    f.close()
+67	    os.chmod(path, 0o777)
+68	    return path
+
+--------------------------------------------------
+>> Issue: [B107:hardcoded_password_default] Possible hardcoded password: 'admin@rent'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b107_hardcoded_password_default.html
+   Location: .\car_rental.py:70:0
+69	
+70	def adminLogin(user, password="admin@rent"):
+71	    if user == "admin" and password == "admin@rent":
+72	        return True
+73	    return False
+74	
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'admin@rent'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: .\car_rental.py:71:39
+70	def adminLogin(user, password="admin@rent"):
+71	    if user == "admin" and password == "admin@rent":
+72	        return True
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 84
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 5
+		Medium: 4
+		High: 2
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 1
+		Medium: 3
+		High: 7
+Files skipped (0):

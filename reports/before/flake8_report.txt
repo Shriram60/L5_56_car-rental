@@ -1,0 +1,25 @@
+car_rental.py:2:1: F401 'json' imported but unused
+car_rental.py:16:1: E302 expected 2 blank lines, found 1
+car_rental.py:19:80: E501 line too long (96 > 79 characters)
+car_rental.py:22:1: E302 expected 2 blank lines, found 1
+car_rental.py:23:80: E501 line too long (92 > 79 characters)
+car_rental.py:25:1: E302 expected 2 blank lines, found 1
+car_rental.py:29:1: E302 expected 2 blank lines, found 1
+car_rental.py:31:80: E501 line too long (91 > 79 characters)
+car_rental.py:33:80: E501 line too long (110 > 79 characters)
+car_rental.py:36:1: E302 expected 2 blank lines, found 1
+car_rental.py:41:5: E722 do not use bare 'except'
+car_rental.py:44:1: E302 expected 2 blank lines, found 1
+car_rental.py:47:1: E302 expected 2 blank lines, found 1
+car_rental.py:50:1: E302 expected 2 blank lines, found 1
+car_rental.py:56:1: E302 expected 2 blank lines, found 1
+car_rental.py:62:1: E302 expected 2 blank lines, found 1
+car_rental.py:65:80: E501 line too long (123 > 79 characters)
+car_rental.py:70:1: E302 expected 2 blank lines, found 1
+car_rental.py:75:1: E302 expected 2 blank lines, found 1
+car_rental.py:78:34: E712 comparison to True should be 'if cond is True:' or 'if cond:'
+car_rental.py:82:1: E302 expected 2 blank lines, found 1
+car_rental.py:88:80: E501 line too long (83 > 79 characters)
+car_rental.py:89:80: E501 line too long (89 > 79 characters)
+car_rental.py:90:80: E501 line too long (84 > 79 characters)
+car_rental.py:101:1: E305 expected 2 blank lines after class or function definition, found 1
